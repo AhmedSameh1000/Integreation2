@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-end">
+    <button mat-raised-button color="primary" (click)="MangeModule()">
+      Create Module
+    </button>
+  </div>
+  <div class="mycontainer">
+    <div *ngFor="let module of Modules" class="MyCard">
+      <mat-card style="height: 100%">
+        <mat-card-header>
+          <mat-card-title>{{ module.name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>From:</strong> {{ module.tableFromName }}</p>
+          <p><strong>To:</strong> {{ module.tableToName }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            class="d-flex btn btn-outline-primary"
+            (click)="syncModule(module.id, module.syncType)"
+            [disabled]="module.isLoading"
+          >
+            <div class="d-flex align-items-center gap-3">
+              <div>Sync</div>
+              <div *ngIf="module.isLoading">
+                <mat-spinner
+                  diameter="20"
+                  [strokeWidth]="5"
+                  style="stroke: white !important"
+                ></mat-spinner>
+              </div>
+            </div>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <div *ngIf="!Modules?.length" class="mat-table-wrapper">
+    <mat-card class="mat-message-card"> No Modules available. </mat-card>
+  </div>
+</div>
