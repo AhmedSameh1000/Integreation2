@@ -249,139 +249,117 @@
       </div>
     </mat-tab>
     <mat-tab label="Column Mapping">
-      <div formArrayName="Columns" class="form-container">
-        <div
-          *ngFor="
-            let Referance of moduleForm.get('Columns')['controls'];
-            let i = index
-          "
-          [formGroupName]="i"
-          class="d-flex"
-        >
-          <div class="form-group d-flex">
-            <div class="d-flex align-items-center">
-              <div class="d-flex justify-content-center align-items-center">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  (click)="removeColumn(i)"
-                >
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </div>
-              <div>
-                <label for="fromPrimaryKeyName" class="form-label"> From</label>
-                <select
-                  class="form-control"
-                  formControlName="ColumnFrom"
-                  required
-                >
-                  <option [value]="null" disabled>Select Column</option>
-                  <option *ngFor="let column of ColumnsFrom" [value]="column">
-                    {{ column }}
-                  </option>
-                </select>
-              </div>
-            </div>
+      <div class="container20">
+        <h2>Column Mapping Configuration</h2>
+
+        <div class="mapping-rows" formArrayName="Columns">
+          <div class="mapping-row header text-center">
+            <div>From Column</div>
+            <div>To Column</div>
+            <div>isRef</div>
+            <div>Reference</div>
+            <div>Actions</div>
           </div>
 
-          <div class="form-group">
-            <label for="toPrimaryKeyName" class="form-label"> To</label>
-            <select
-              class="form-control"
-              id="columnToName"
-              formControlName="ColumnTo"
-              required
-            >
-              <option [value]="null" disabled>Select Column</option>
+          <div
+            *ngFor="
+              let Referance of moduleForm.get('Columns')['controls'];
+              let i = index
+            "
+            [formGroupName]="i"
+            class="mapping-row"
+          >
+            <select formControlName="ColumnFrom">
+              <option value="">Select Column</option>
+              <option *ngFor="let column of ColumnsFrom" [value]="column">
+                {{ column }}
+              </option>
+            </select>
+
+            <select formControlName="ColumnTo">
+              <option value="">Select Column</option>
               <option *ngFor="let column of ColumnsTo" [value]="column">
                 {{ column }}
               </option>
             </select>
-          </div>
 
-          <div class="form-group">
-            <label for="isChecked" class="form-label">Is Reference</label>
-            <input type="checkbox" id="isChecked" formControlName="IsChecked" />
-          </div>
+            <div class="checkbox-wrapper">
+              <input type="checkbox" formControlName="IsChecked" />
+            </div>
 
-          <div class="form-group">
-            <label for="tableToName" class="form-label">Reference </label>
-            <select
-              class="form-control"
-              id="Referance"
-              formControlName="Referance"
-              required
-            >
-              <option [value]="null" disabled>Select Table</option>
+            <select formControlName="Referance">
+              <option value="">Select Table</option>
               <option *ngFor="let table of Totables" [value]="table">
                 {{ table }}
               </option>
             </select>
-          </div>
 
-          <!-- Delete Button -->
+            <button type="button" class="remove-btn" (click)="removeColumn(i)">
+              Remove
+            </button>
+          </div>
         </div>
 
-        <div class="d-flex mt-2 justify-content-end">
-          <button class="btn btn-primary" (click)="AddColumn()">
-            <i class="fa-solid fa-square-plus"></i>
+        <div class="actions">
+          <button type="button" class="add-btn" (click)="AddColumn()">
+            Add Mapping
           </button>
         </div>
       </div>
     </mat-tab>
     <mat-tab label="References">
-      <div formArrayName="References" class="form-container">
-        <div
-          *ngFor="
-            let Referance of moduleForm.get('References')['controls'];
-            let i = index
-          "
-          [formGroupName]="i"
-          class="d-flex"
-        >
-          <div class="form-group">
-            <label for="tableToName" class="form-label">Reference </label>
+      <div class="container">
+        <h2>Column Referance Configuration</h2>
+
+        <div class="mapping-rows" formArrayName="References">
+          <div class="mapping-row header d-flex justify-content-around">
+            <div>From Column</div>
+            <div>LocalId/CloudId</div>
+            <div>Reference</div>
+            <div>Actions</div>
+          </div>
+
+          <div
+            *ngFor="
+              let Referance of moduleForm.get('References')['controls'];
+              let i = index
+            "
+            [formGroupName]="i"
+            class="mapping-row d-flex justify-content-between"
+          >
             <select
-              class="form-control"
-              id="TableFromName"
               formControlName="TableFromName"
+              id="Sourceherer"
               required
               (change)="OnRefranceTableChange($event, LocalIds, PrimaryIds)"
             >
-              <option [value]="null" disabled>Select Table</option>
+              <option value="">Select Column</option>
               <option *ngFor="let table of Totables" [value]="table">
                 {{ table }}
               </option>
             </select>
-          </div>
-          <div class="form-group">
-            <label for="toPrimaryKeyName" class="form-label">
-              LocalId/CloudId</label
-            >
+
             <select
-              class="form-control"
               id="LocalName"
               formControlName="LocalName"
               required
               #LocalIds
             ></select>
-          </div>
-          <div class="form-group">
-            <label for="toPrimaryKeyName" class="form-label"> Primary</label>
+
             <select
-              class="form-control"
               id="PrimaryName"
               formControlName="PrimaryName"
               required
               #PrimaryIds
             ></select>
+
+            <button type="button" class="remove-btn">Remove</button>
           </div>
         </div>
 
-        <div class="d-flex mt-2 justify-content-end">
-          <button class="btn btn-primary" (click)="AddReferance()">
-            <i class="fa-solid fa-square-plus"></i>
+        <div class="actions">
+          <button type="button" class="add-btn" (click)="AddReferance()">
+            Add Referance
           </button>
         </div>
       </div>

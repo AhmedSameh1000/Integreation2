@@ -148,36 +148,72 @@ namespace Integration.business.Services.Implementation
             if (Module is null)
                 return new ApiResponse<ModuleFullDataForReturnDTO>(false, "Module Not Found");
 
+
+            var Referances=await _tableReference.GetAllAsNoTracking(c=>c.ModuleId==Id);
+
             var ModuleForReturn = new ModuleFullDataForReturnDTO()
             {
-               Id = Id,
-               Name=Module.Name,
-               CloudIdName=Module.CloudIdName,
-               LocalIdName=Module.LocalIdName,
-               FromDbId=Module.FromDbId,
-               ToDbId = Module.ToDbId,
-               FromInsertFlagName=Module.FromInsertFlagName,
-               FromUpdateFlagName = Module.FromUpdateFlagName,
-               ToInsertFlagName=Module.ToInsertFlagName,
-               ToUpdateFlagName=Module.ToUpdateFlagName,
-               SyncType = Module.SyncType.ToString(),
-               fromPrimaryKeyName=Module.fromPrimaryKeyName,
-               TableFromName=Module.TableFromName,
-               TableToName=Module.TableToName,
-               ToPrimaryKeyName=Module.ToPrimaryKeyName,
-               columnsFromDTOs=Module.columnFroms.Select(c=>new ColumnFromDTO()
-               {
-                   Id=c.Id,
-                   ColumnFromName=c.ColumnFromName,
-                   ColumnToName=c.ColumnToName,
-                   isReference = c.isReference,
-                   ModuleId=c.ModuleId,
-                   TableReferenceName = c.TableReferenceName
-               }).ToList(),
-               
+                Id = Id,
+                Name = Module.Name,
+                CloudIdName = Module.CloudIdName,
+                LocalIdName = Module.LocalIdName,
+                FromDbId = Module.FromDbId,
+                ToDbId = Module.ToDbId,
+                FromInsertFlagName = Module.FromInsertFlagName,
+                FromUpdateFlagName = Module.FromUpdateFlagName,
+                ToInsertFlagName = Module.ToInsertFlagName,
+                ToUpdateFlagName = Module.ToUpdateFlagName,
+                SyncType = Module.SyncType.ToString(),
+                fromPrimaryKeyName = Module.fromPrimaryKeyName,
+                TableFromName = Module.TableFromName,
+                TableToName = Module.TableToName,
+                ToPrimaryKeyName = Module.ToPrimaryKeyName,
+                columnsFromDTOs = Module.columnFroms.Select(c => new ColumnFromDTO()
+                {
+                    Id = c.Id,
+                    ColumnFromName = c.ColumnFromName,
+                    ColumnToName = c.ColumnToName,
+                    isReference = c.isReference,
+                    ModuleId = c.ModuleId,
+                    TableReferenceName = c.TableReferenceName
+                }).ToList(),
+                referancesForReturnDTOs = Referances.Select(c => new ReferancesForReturnDTO()
+                {
+                    Id = c.Id,
+                    ModuleId = c.ModuleId,
+                    LocalName = c.LocalName,
+                    PrimaryName = c.PrimaryName,
+                    TableFromName = c.TableFromName
+                }).ToList()
             };
             return new ApiResponse<ModuleFullDataForReturnDTO>(true,"Module Found",ModuleForReturn);
          
+        }
+
+        public async Task<ApiResponse<bool>> DeleteModule(int id)
+        {
+           var Module=await _moduleRepository.GetFirstOrDefault(c=>c.Id==id);
+
+            if (Module is null)
+                return new ApiResponse<bool>(false, "Module not found");
+            var Referance=await _tableReference.GetAllAsTracking(c=>c.ModuleId==id);
+
+            if (Referance.Any())
+            {
+                _tableReference.RemoveRange(Referance);
+                var deleted = await _tableReference.SaveChanges();
+
+                if (!deleted)
+                    return new ApiResponse<bool>(false, "En error whene delete module");
+            }
+
+            _moduleRepository.Remove(Module);
+            var IsDeleted= await _moduleRepository.SaveChanges();
+
+            if (!IsDeleted)
+                return new ApiResponse<bool>(false, "En error whene delete module");
+
+            return new ApiResponse<bool>(true, "Module deleted successfully");
         }
     }
 }

@@ -78,6 +78,16 @@ namespace Integration.api.Controllers
                 return NotFound(Result);
 
             return Ok(Result);
+        }  
+        [HttpDelete("DeleteModule/{id}")]
+        public async Task<IActionResult> DeleteModule(int id)
+        {
+            var Result=await _moduleService.DeleteModule(id);
+
+            if(!Result.Success)
+                return BadRequest(Result);
+
+            return Ok(Result);
         }
 
 

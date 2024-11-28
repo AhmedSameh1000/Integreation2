@@ -13,6 +13,7 @@ namespace Integration.business.Services.Interfaces
 
 
         public Task<ApiResponse<ModuleFullDataForReturnDTO>> GetModuleById(int Id);
+        public Task<ApiResponse<bool>> DeleteModule(int id);
     }
 
 }

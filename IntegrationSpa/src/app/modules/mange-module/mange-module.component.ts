@@ -1,5 +1,12 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Inject, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
@@ -26,6 +33,10 @@ export class MangeModuleComponent implements OnInit {
     if (this.data) {
       this.GetModuleById();
     }
+  }
+
+  ngAfterViewInit() {
+    this.Element = document.getElementById('Sourceherer');
   }
 
   AddReferance() {
@@ -259,6 +270,8 @@ export class MangeModuleComponent implements OnInit {
         this.ColumnsTo = ColumnTo;
       },
     });
+
+    // this.DataBaseService.GetColumns(this.ToDataBaseSelectedId)
   }
   initializeForm() {
     this.moduleForm = new FormGroup({
@@ -333,7 +346,25 @@ export class MangeModuleComponent implements OnInit {
         })
       );
     });
+
+    this.GetColumnsReferance(moduleData.referancesForReturnDTOs);
   }
+
+  Element: any;
+  GetColumnsReferance(referancesForReturnDTOs) {
+    const Referances = this.moduleForm.get('References') as FormArray;
+
+    referancesForReturnDTOs.forEach((column: any) => {
+      Referances.push(
+        new FormGroup({
+          TableFromName: new FormControl(column.tableFromName),
+          LocalName: new FormControl(column.localName),
+          PrimaryName: new FormControl(column.primaryName),
+        })
+      );
+    });
+  }
+
   AddColumn() {
     var Column = new FormGroup({
       ColumnTo: new FormControl(null),

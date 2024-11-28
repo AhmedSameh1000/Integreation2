@@ -86,10 +86,15 @@ export class ListmodulesComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
+        this.ModuleService.DeleteModule(moduleid).subscribe({
+          next: (res) => {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your file has been deleted.',
+              icon: 'success',
+            });
+            this.GetModules();
+          },
         });
       }
     });

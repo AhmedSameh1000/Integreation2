@@ -14,6 +14,11 @@ export class ModuleService {
   GetModuleById(id) {
     return this.HttpClient.get(environment.BaseUrl + '/Module/GetModule/' + id);
   }
+  DeleteModule(id) {
+    return this.HttpClient.delete(
+      environment.BaseUrl + '/Module/DeleteModule/' + id
+    );
+  }
   CreateModule(module) {
     return this.HttpClient.post(
       environment.BaseUrl + '/Module/CreateModule',

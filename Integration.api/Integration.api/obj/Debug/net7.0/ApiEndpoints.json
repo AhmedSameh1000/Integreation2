@@ -186,6 +186,22 @@
   },
   {
     "ContainingType": "Integration.api.Controllers.ModuleController",
+    "Method": "DeleteModule",
+    "RelativePath": "api/Module/DeleteModule/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Integration.api.Controllers.ModuleController",
     "Method": "GetModule",
     "RelativePath": "api/Module/GetModule/{id}",
     "HttpMethod": "GET",

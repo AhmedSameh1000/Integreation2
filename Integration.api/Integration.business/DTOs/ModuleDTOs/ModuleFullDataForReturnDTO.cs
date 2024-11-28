@@ -20,6 +20,7 @@ namespace Integration.business.DTOs.ModuleDTOs
         public string FromInsertFlagName { get; set; }
         public string FromUpdateFlagName { get; set; }
         public List<ColumnFromDTO>  columnsFromDTOs { get; set; }
+        public List<ReferancesForReturnDTO> referancesForReturnDTOs { get; set; }
     }
 
     public class ColumnFromDTO
@@ -31,5 +32,14 @@ namespace Integration.business.DTOs.ModuleDTOs
 
         public bool isReference { get; set; }
         public string? TableReferenceName { get; set; }
+    }
+
+    public class ReferancesForReturnDTO
+    {
+        public int Id { get; set; }
+        public string TableFromName { get; set; }
+        public string LocalName { get; set; }
+        public string PrimaryName { get; set; }
+        public int? ModuleId { get; set; }
     }
 }
