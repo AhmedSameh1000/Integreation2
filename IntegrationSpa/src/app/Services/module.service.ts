@@ -11,6 +11,9 @@ export class ModuleService {
   GetModules() {
     return this.HttpClient.get(environment.BaseUrl + '/Module/Modules');
   }
+  GetModuleById(id) {
+    return this.HttpClient.get(environment.BaseUrl + '/Module/GetModule/' + id);
+  }
   CreateModule(module) {
     return this.HttpClient.post(
       environment.BaseUrl + '/Module/CreateModule',

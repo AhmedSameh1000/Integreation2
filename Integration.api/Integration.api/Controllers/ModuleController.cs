@@ -68,6 +68,17 @@ namespace Integration.api.Controllers
         {
             return Ok(await _moduleService.GetModules());
         }
+       
+        [HttpGet("GetModule/{id}")]
+        public async Task<IActionResult> GetModule(int id)
+        {
+            var Result=await _moduleService.GetModuleById(id);
+
+            if(!Result.Success)
+                return NotFound(Result);
+
+            return Ok(Result);
+        }
 
 
 

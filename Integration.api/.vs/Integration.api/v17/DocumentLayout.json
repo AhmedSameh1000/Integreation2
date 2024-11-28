@@ -1,12 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\TrueTech\\Integration\\Integration.api\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|d:\\truetech\\integration\\integration.api\\integration.api\\controllers\\databasemetadatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|solutionrelative:integration.api\\controllers\\databasemetadatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|d:\\truetech\\integration\\integration.api\\integration.api\\controllers\\databasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|solutionrelative:integration.api\\controllers\\databasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|d:\\truetech\\integration\\integration.api\\integration.api\\controllers\\modulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|solutionrelative:integration.api\\controllers\\modulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C378BB7-1F11-4AA0-BFA8-1203E6A64FE1}|Integration.business\\Integration.business.csproj|d:\\truetech\\integration\\integration.api\\integration.business\\services\\implementation\\moduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C378BB7-1F11-4AA0-BFA8-1203E6A64FE1}|Integration.business\\Integration.business.csproj|solutionrelative:integration.business\\services\\implementation\\moduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DataBaseController.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\DataBaseController.cs",
+              "RelativeDocumentMoniker": "Integration.api\\Controllers\\DataBaseController.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\DataBaseController.cs",
+              "RelativeToolTip": "Integration.api\\Controllers\\DataBaseController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T10:43:21.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DataBaseMetaDataController.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\DataBaseMetaDataController.cs",
+              "RelativeDocumentMoniker": "Integration.api\\Controllers\\DataBaseMetaDataController.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\DataBaseMetaDataController.cs",
+              "RelativeToolTip": "Integration.api\\Controllers\\DataBaseMetaDataController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwCsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T10:43:20.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ModuleController.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\ModuleController.cs",
+              "RelativeDocumentMoniker": "Integration.api\\Controllers\\ModuleController.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\ModuleController.cs",
+              "RelativeToolTip": "Integration.api\\Controllers\\ModuleController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAEcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T09:56:42.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ModuleService.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.business\\Services\\Implementation\\ModuleService.cs",
+              "RelativeDocumentMoniker": "Integration.business\\Services\\Implementation\\ModuleService.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.business\\Services\\Implementation\\ModuleService.cs",
+              "RelativeToolTip": "Integration.business\\Services\\Implementation\\ModuleService.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAADwv48AAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T09:49:26.561Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

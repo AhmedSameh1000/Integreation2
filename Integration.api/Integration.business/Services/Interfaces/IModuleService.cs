@@ -10,6 +10,9 @@ namespace Integration.business.Services.Interfaces
         public Task<List<ModuleForReturnDTO>> GetModules();
 
         public Task<ApiResponse<bool>> CreateModule(ModuleForCreateDTO moduleForCreateDTO);
+
+
+        public Task<ApiResponse<ModuleFullDataForReturnDTO>> GetModuleById(int Id);
     }
 
 }

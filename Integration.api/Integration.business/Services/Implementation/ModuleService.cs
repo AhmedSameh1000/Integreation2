@@ -141,6 +141,43 @@ namespace Integration.business.Services.Implementation
             }
         }
 
+        public async Task<ApiResponse<ModuleFullDataForReturnDTO>> GetModuleById(int Id)
+        {
+            var Module=await _moduleRepository.GetFirstOrDefault(c => c.Id == Id, new[] { "columnFroms" } );
 
+            if (Module is null)
+                return new ApiResponse<ModuleFullDataForReturnDTO>(false, "Module Not Found");
+
+            var ModuleForReturn = new ModuleFullDataForReturnDTO()
+            {
+               Id = Id,
+               Name=Module.Name,
+               CloudIdName=Module.CloudIdName,
+               LocalIdName=Module.LocalIdName,
+               FromDbId=Module.FromDbId,
+               ToDbId = Module.ToDbId,
+               FromInsertFlagName=Module.FromInsertFlagName,
+               FromUpdateFlagName = Module.FromUpdateFlagName,
+               ToInsertFlagName=Module.ToInsertFlagName,
+               ToUpdateFlagName=Module.ToUpdateFlagName,
+               SyncType = Module.SyncType.ToString(),
+               fromPrimaryKeyName=Module.fromPrimaryKeyName,
+               TableFromName=Module.TableFromName,
+               TableToName=Module.TableToName,
+               ToPrimaryKeyName=Module.ToPrimaryKeyName,
+               columnsFromDTOs=Module.columnFroms.Select(c=>new ColumnFromDTO()
+               {
+                   Id=c.Id,
+                   ColumnFromName=c.ColumnFromName,
+                   ColumnToName=c.ColumnToName,
+                   isReference = c.isReference,
+                   ModuleId=c.ModuleId,
+                   TableReferenceName = c.TableReferenceName
+               }).ToList(),
+               
+            };
+            return new ApiResponse<ModuleFullDataForReturnDTO>(true,"Module Found",ModuleForReturn);
+         
+        }
     }
 }

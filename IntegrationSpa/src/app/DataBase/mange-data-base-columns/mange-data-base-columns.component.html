@@ -33,7 +33,7 @@
           <div class="column-entry card mb-3">
             <div class="card-body">
               <div class="row g-3">
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <label class="form-label">Column Name</label>
                   <input
                     type="text"
@@ -55,7 +55,7 @@
                     >
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <label class="form-label">Data Type</label>
                   <select
                     class="form-select column-type"
@@ -85,18 +85,34 @@
                     >
                   </div>
                 </div>
-                <div class="col-md-3">
-                  <label class="form-label">Options</label>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input column-nullable"
-                      type="checkbox"
-                      id="nullableCheck1"
-                      formControlName="AllowNULL"
-                    />
-                    <label class="form-check-label" for="nullableCheck1">
-                      Allow Null
-                    </label>
+                <div>
+                  <div class="col-md-3">
+                    <label class="form-label">Options</label>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input column-nullable"
+                        type="checkbox"
+                        id="nullableCheck1"
+                        formControlName="AllowNULL"
+                      />
+                      <label class="form-check-label" for="nullableCheck1">
+                        Allow Null
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Options</label>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input column-nullable"
+                        type="checkbox"
+                        id="nullableCheck1"
+                        formControlName="primary"
+                      />
+                      <label class="form-check-label" for="nullableCheck1">
+                        Primary Key
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>

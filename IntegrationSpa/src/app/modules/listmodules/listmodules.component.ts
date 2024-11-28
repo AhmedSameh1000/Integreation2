@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ModuleService } from 'src/app/Services/module.service';
 import { MangeModuleComponent } from '../mange-module/mange-module.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listmodules',
@@ -62,6 +63,35 @@ export class ListmodulesComponent implements OnInit {
       next: (res) => {
         if (res) this.GetModules();
       },
+    });
+  }
+  EditModule(Id) {
+    var Dilog = this.MatDilog.open(MangeModuleComponent, {
+      data: { Id: Id },
+    });
+    Dilog.afterClosed().subscribe({
+      next: (res) => {
+        if (res) this.GetModules();
+      },
+    });
+  }
+  Delete(moduleid) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+        });
+      }
     });
   }
 }

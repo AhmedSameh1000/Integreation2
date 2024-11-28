@@ -14,7 +14,7 @@
           <p><strong>From:</strong> {{ module.tableFromName }}</p>
           <p><strong>To:</strong> {{ module.tableToName }}</p>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions class="d-flex justify-content-between">
           <button
             class="d-flex btn btn-outline-primary"
             (click)="syncModule(module.id, module.syncType)"
@@ -31,12 +31,26 @@
               </div>
             </div>
           </button>
+
+          <div class="d-flex gap-2">
+            <button class="btn btn-success" (click)="EditModule(module.id)">
+              Edit
+            </button>
+            <button class="btn btn-danger" (click)="Delete(module.id)">
+              Delete
+            </button>
+          </div>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
 
-  <div *ngIf="!Modules?.length" class="mat-table-wrapper">
-    <mat-card class="mat-message-card"> No Modules available. </mat-card>
+  <div
+    *ngIf="!Modules?.length"
+    class="mat-table-wrapper d-flex justify-content-center"
+  >
+    <mat-card class="mat-message-card w-auto text-center text-nowrap p-4">
+      No Modules available.
+    </mat-card>
   </div>
 </div>

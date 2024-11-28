@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { DataBaseService } from 'src/app/Services/data-base.service';
 import { ModuleService } from 'src/app/Services/module.service';
@@ -16,24 +16,16 @@ export class MangeModuleComponent implements OnInit {
     private manageModuleService: ModuleService,
     private toastr: ToastrService,
     private DataBaseService: DataBaseService,
-    private MatdiloRef: MatDialogRef<MangeModuleComponent>
+    private MatdiloRef: MatDialogRef<MangeModuleComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { Id: string }
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
     this.GetDataBases();
-  }
-  AddColumn() {
-    var Column = new FormGroup({
-      ColumnTo: new FormControl(null),
-      ColumnFrom: new FormControl(null),
-      IsChecked: new FormControl(false),
-      Referance: new FormControl(null),
-    });
-
-    let Columns = this.moduleForm.get('Columns') as FormArray;
-
-    Columns.push(Column);
+    if (this.data) {
+      this.GetModuleById();
+    }
   }
 
   AddReferance() {
@@ -48,26 +40,6 @@ export class MangeModuleComponent implements OnInit {
     References.push(Reference);
   }
   moduleForm: FormGroup;
-
-  initializeForm() {
-    this.moduleForm = new FormGroup({
-      moduleName: new FormControl('', Validators.required),
-      tableFromName: new FormControl('', Validators.required),
-      tableToName: new FormControl('', Validators.required),
-      toPrimaryKeyName: new FormControl('', Validators.required),
-      fromPrimaryKeyName: new FormControl('', Validators.required),
-      localIdName: new FormControl('', Validators.required),
-      cloudIdName: new FormControl('', Validators.required),
-      toDbId: new FormControl('', Validators.required),
-      fromDbId: new FormControl('', Validators.required),
-      toInsertFlagName: new FormControl('', Validators.required),
-      toUpdateFlagName: new FormControl('', Validators.required),
-      fromInsertFlagName: new FormControl('', Validators.required),
-      fromUpdateFlagName: new FormControl('', Validators.required),
-      Columns: new FormArray([]),
-      References: new FormArray([]),
-    });
-  }
 
   DataBases: any[] = []; // قائمة قواعد البيانات اللي هنعرضها في الـ select
 
@@ -172,7 +144,7 @@ export class MangeModuleComponent implements OnInit {
     this.selectedTabIndex--;
   }
 
-  Print() {
+  AddModule() {
     console.log(this.moduleForm.value);
     this.manageModuleService.CreateModule(this.moduleForm.value).subscribe({
       next: (res) => {
@@ -185,6 +157,9 @@ export class MangeModuleComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+  SaveModule() {
+    console.log(this.moduleForm.value);
   }
   get Columns() {
     return this.moduleForm.get('Columns') as FormArray;
@@ -243,5 +218,132 @@ export class MangeModuleComponent implements OnInit {
         },
       }
     );
+  }
+
+  GetModuleById() {
+    this.manageModuleService.GetModuleById(this.data.Id).subscribe({
+      next: (res: any) => {
+        this.GetInfo(res);
+        this.mapModuleToForm(res.data);
+        console.log(res.data);
+      },
+    });
+  }
+  GetInfo(res) {
+    this.ToDataBaseSelectedId = res.data.toDbId;
+    this.FromDataBaseSelectedId = res.data.fromDbId;
+    this.DataBaseService.GetTables(this.FromDataBaseSelectedId).subscribe({
+      next: (tablefrom: any) => {
+        this.Fromtables = tablefrom;
+      },
+    });
+    this.DataBaseService.GetTables(this.ToDataBaseSelectedId).subscribe({
+      next: (tableto: any) => {
+        this.Totables = tableto;
+      },
+    });
+
+    this.DataBaseService.GetColumns(
+      this.FromDataBaseSelectedId,
+      res.data.tableFromName
+    ).subscribe({
+      next: (columnfrom) => {
+        this.ColumnsFrom = columnfrom;
+      },
+    });
+    this.DataBaseService.GetColumns(
+      this.ToDataBaseSelectedId,
+      res.data.tableToName
+    ).subscribe({
+      next: (ColumnTo) => {
+        this.ColumnsTo = ColumnTo;
+      },
+    });
+  }
+  initializeForm() {
+    this.moduleForm = new FormGroup({
+      moduleName: new FormControl('', Validators.required),
+      tableFromName: new FormControl('', Validators.required),
+      tableToName: new FormControl('', Validators.required),
+      toPrimaryKeyName: new FormControl('', Validators.required),
+      fromPrimaryKeyName: new FormControl('', Validators.required),
+      localIdName: new FormControl('', Validators.required),
+      cloudIdName: new FormControl('', Validators.required),
+      toDbId: new FormControl('', Validators.required),
+      fromDbId: new FormControl('', Validators.required),
+      toInsertFlagName: new FormControl('', Validators.required),
+      toUpdateFlagName: new FormControl('', Validators.required),
+      fromInsertFlagName: new FormControl('', Validators.required),
+      fromUpdateFlagName: new FormControl('', Validators.required),
+      Columns: new FormArray([]),
+      References: new FormArray([]),
+    });
+  }
+  mapModuleToForm(moduleData: any) {
+    // Set simple form controls
+    this.moduleForm = new FormGroup({
+      moduleName: new FormControl(moduleData.name, Validators.required),
+      tableFromName: new FormControl(
+        moduleData.tableFromName,
+        Validators.required
+      ),
+      tableToName: new FormControl(moduleData.tableToName, Validators.required),
+      toPrimaryKeyName: new FormControl(
+        moduleData.toPrimaryKeyName,
+        Validators.required
+      ),
+      fromPrimaryKeyName: new FormControl(
+        moduleData.fromPrimaryKeyName,
+        Validators.required
+      ),
+      localIdName: new FormControl(moduleData.localIdName, Validators.required),
+      cloudIdName: new FormControl(moduleData.cloudIdName, Validators.required),
+      toDbId: new FormControl(moduleData.toDbId, Validators.required),
+      fromDbId: new FormControl(moduleData.fromDbId, Validators.required),
+      toInsertFlagName: new FormControl(
+        moduleData.toInsertFlagName,
+        Validators.required
+      ),
+      toUpdateFlagName: new FormControl(
+        moduleData.toUpdateFlagName,
+        Validators.required
+      ),
+      fromInsertFlagName: new FormControl(
+        moduleData.fromInsertFlagName,
+        Validators.required
+      ),
+      fromUpdateFlagName: new FormControl(
+        moduleData.fromUpdateFlagName,
+        Validators.required
+      ),
+      Columns: new FormArray([]),
+      References: new FormArray([]),
+    });
+    const columnsArray = this.moduleForm.get('Columns') as FormArray;
+    moduleData.columnsFromDTOs.forEach((column: any) => {
+      columnsArray.push(
+        new FormGroup({
+          ColumnFrom: new FormControl(
+            column.columnFromName,
+            Validators.required
+          ),
+          ColumnTo: new FormControl(column.columnToName, Validators.required),
+          IsChecked: new FormControl(column.isReference, Validators.required),
+          Referance: new FormControl(column.tableReferenceName),
+        })
+      );
+    });
+  }
+  AddColumn() {
+    var Column = new FormGroup({
+      ColumnTo: new FormControl(null),
+      ColumnFrom: new FormControl(null),
+      IsChecked: new FormControl(false),
+      Referance: new FormControl(null),
+    });
+
+    let Columns = this.moduleForm.get('Columns') as FormArray;
+
+    Columns.push(Column);
   }
 }

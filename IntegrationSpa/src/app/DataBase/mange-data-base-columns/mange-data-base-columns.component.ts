@@ -27,6 +27,7 @@ export class MangeDataBaseColumnsComponent implements OnInit {
       column: new FormControl(null, Validators.required),
       type: new FormControl(null, Validators.required),
       AllowNULL: new FormControl(false, Validators.required),
+      primary: new FormControl(false, Validators.required),
     });
   }
   DataTypes = [
@@ -54,18 +55,28 @@ export class MangeDataBaseColumnsComponent implements OnInit {
     const table = Controls['Table'].value;
     const column = Controls['column'].value;
     const type = Controls['type'].value;
+    const isPrimary = Controls['primary'].value;
     const allowNull = Controls['AllowNULL'].value ? 'NULL' : 'NOT NULL';
 
     let query = '';
 
     if (this.data.dbType === 'SqlServer') {
-      query = `ALTER TABLE ${table} ADD ${column} ${type} ${allowNull};`;
+      query = `ALTER TABLE ${table} ADD ${column} ${type} ${allowNull}`;
+
+      if (isPrimary) {
+        query += ' IDENTITY(1,1) PRIMARY KEY';
+      }
     } else {
       query = `ALTER TABLE ${table} ADD COLUMN ${column} ${
         type == 'BIT' ? 'BOOLEAN' : type
-      } ${allowNull};`;
-    }
+      } ${allowNull}`;
 
+      if (isPrimary) {
+        query += ' AUTO_INCREMENT PRIMARY KEY';
+      }
+    }
+    query += ';';
+    console.log(query);
     const options = {
       dbId: this.data.dbId,
       query: query,
@@ -78,6 +89,7 @@ export class MangeDataBaseColumnsComponent implements OnInit {
       },
       error: (err) => {
         this.Toaster.error(err.error.message);
+        console.log(err);
       },
     });
   }

@@ -9,5 +9,5 @@ namespace Integration.business.DTOs.ModuleDTOs
         public string TableFromName { get; set; }
         public string TableToName { get; set; }
         public string SyncType { get; set; }
-    }
+    }   
 }

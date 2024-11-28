@@ -405,12 +405,20 @@
       Next
     </button>
     <button
-      (click)="Print()"
+      (click)="AddModule()"
       mat-raised-button
       color="primary"
-      *ngIf="selectedTabIndex == 3"
+      *ngIf="selectedTabIndex == 3 && !data"
     >
-      save Module
+      Add Module
+    </button>
+    <button
+      (click)="SaveModule()"
+      mat-raised-button
+      color="primary"
+      *ngIf="selectedTabIndex == 3 && data"
+    >
+      Save Module
     </button>
   </div>
 </form>
