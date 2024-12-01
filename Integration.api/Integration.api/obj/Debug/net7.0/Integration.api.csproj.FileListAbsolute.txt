@@ -298,7 +298,6 @@ D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\staticw
 D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Integration.api.props
 D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Integration.api.props
 D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\staticwebassets.pack.json
-D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\staticwebassets.upToDateCheck.txt
 D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\Integrat.031CA4F9.Up2Date
 D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\Integration.api.dll
 D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\refint\Integration.api.dll

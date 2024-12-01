@@ -55,11 +55,11 @@ namespace Integration.business.Services.Implementation
 
             if (DataBase.dataBaseType == DataBaseType.SqlServer)
             {
-                return await _databaseSqlService.GetAllColumnsAsync(DataBase.ConnectionString, tableName);
+                return await  _databaseSqlService.GetAllColumnsAsync(DataBase.ConnectionString, tableName);
             }
             else
             {
-                return await _databaseMySqlService.GetAllColumnsAsync(DataBase.ConnectionString,tableName);
+                return await  _databaseMySqlService.GetAllColumnsAsync(DataBase.ConnectionString,tableName);
             }
         }
 

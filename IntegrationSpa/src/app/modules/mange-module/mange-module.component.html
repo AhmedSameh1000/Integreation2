@@ -270,14 +270,14 @@
             class="mapping-row"
           >
             <select formControlName="ColumnFrom">
-              <option value="">Select Column</option>
+              <option [value]="null" disabled selected>Select Column</option>
               <option *ngFor="let column of ColumnsFrom" [value]="column">
                 {{ column }}
               </option>
             </select>
 
             <select formControlName="ColumnTo">
-              <option value="">Select Column</option>
+              <option [value]="null" disabled selected>Select Column</option>
               <option *ngFor="let column of ColumnsTo" [value]="column">
                 {{ column }}
               </option>
@@ -288,7 +288,7 @@
             </div>
 
             <select formControlName="Referance">
-              <option value="">Select Table</option>
+              <option [value]="null" disabled selected>Select Column</option>
               <option *ngFor="let table of Totables" [value]="table">
                 {{ table }}
               </option>
@@ -324,14 +324,65 @@
               let Referance of moduleForm.get('References')['controls'];
               let i = index
             "
+            style="padding: 10px"
             [formGroupName]="i"
-            class="mapping-row d-flex justify-content-between"
+            class="mapping-row d-flex justify-content-between align-items-center"
           >
+            <div class="input-container">
+              <input
+                type="text"
+                formControlName="TableFromName"
+                id="Sourceherer"
+                readonly
+                placeholder="Enter Column"
+                class="form-input"
+              />
+            </div>
+
+            <!-- LocalName Input -->
+            <div class="input-container">
+              <input
+                type="text"
+                id="LocalName"
+                formControlName="LocalName"
+                required
+                readonly
+                placeholder="Enter Local Name"
+                class="form-input"
+              />
+            </div>
+
+            <!-- PrimaryName Input -->
+            <div class="input-container">
+              <input
+                type="text"
+                id="PrimaryName"
+                formControlName="PrimaryName"
+                required
+                readonly
+                placeholder="Enter Primary Name"
+                class="form-input"
+              />
+            </div>
+
+            <!-- Remove Button -->
+            <div class="button-container">
+              <button type="button" class="remove-btn">
+                <i class="fas fa-trash"></i> Remove
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="actions d-flex justify-content-between d-flex justify-content-around"
+        >
+          <div class="mapping-row d-flex justify-content-between w-75">
             <select
-              formControlName="TableFromName"
               id="Sourceherer"
               required
-              (change)="OnRefranceTableChange($event, LocalIds, PrimaryIds)"
+              #source
+              (change)="OnRefranceTableChange($event, LocalIds1, PrimaryIds1)"
             >
               <option value="">Select Column</option>
               <option *ngFor="let table of Totables" [value]="table">
@@ -339,28 +390,20 @@
               </option>
             </select>
 
-            <select
-              id="LocalName"
-              formControlName="LocalName"
-              required
-              #LocalIds
-            ></select>
+            <select id="LocalName" required #LocalIds1></select>
 
-            <select
-              id="PrimaryName"
-              formControlName="PrimaryName"
-              required
-              #PrimaryIds
-            ></select>
+            <select id="PrimaryName" required #PrimaryIds1></select>
 
-            <button type="button" class="remove-btn">Remove</button>
+            <!-- Add button -->
+            <button
+              type="button"
+              (click)="
+                AddReferance(source.value, LocalIds1.value, PrimaryIds1.value)
+              "
+            >
+              Add Reference
+            </button>
           </div>
-        </div>
-
-        <div class="actions">
-          <button type="button" class="add-btn" (click)="AddReferance()">
-            Add Referance
-          </button>
         </div>
       </div>
     </mat-tab>

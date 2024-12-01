@@ -1,0 +1,15 @@
+D:\TrueTech\Integration\Integration.api\Integration.data\bin\Release\net7.0\Integration.data.deps.json
+D:\TrueTech\Integration\Integration.api\Integration.data\bin\Release\net7.0\Integration.data.runtimeconfig.json
+D:\TrueTech\Integration\Integration.api\Integration.data\bin\Release\net7.0\Integration.data.dll
+D:\TrueTech\Integration\Integration.api\Integration.data\bin\Release\net7.0\Integration.data.pdb
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\Integration.data.csproj.AssemblyReference.cache
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\Integration.data.GeneratedMSBuildEditorConfig.editorconfig
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\Integration.data.AssemblyInfoInputs.cache
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\Integration.data.AssemblyInfo.cs
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\Integration.data.csproj.CoreCompileInputs.cache
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\Integration.data.sourcelink.json
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\Integration.data.dll
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\refint\Integration.data.dll
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\Integration.data.pdb
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\Integration.data.genruntimeconfig.cache
+D:\TrueTech\Integration\Integration.api\Integration.data\obj\Release\net7.0\ref\Integration.data.dll

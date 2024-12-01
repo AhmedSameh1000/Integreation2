@@ -27,16 +27,16 @@ public class MySqlService : IDatabaseMySqlService
         return tables;
     }
 
-    public async Task<List<string>> GetAllColumnsAsync(string connectionString, string tableName)
+    public  async Task< List<string>> GetAllColumnsAsync(string connectionString, string tableName)
     {
         var columns = new List<string>();
 
         using (var connection = new MySqlConnection(connectionString))
         {
-            await connection.OpenAsync();
+            await  connection.OpenAsync();
             var command = new MySqlCommand($"DESCRIBE {tableName}", connection);
 
-            using (var reader = await command.ExecuteReaderAsync())
+            using (var reader =await  command.ExecuteReaderAsync())
             {
                 while (await reader.ReadAsync())
                 {

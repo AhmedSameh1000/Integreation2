@@ -29,13 +29,13 @@ public class SqlServerService : IDatabaseSqlService
         return tables;
     }
 
-    public async Task<List<string>> GetAllColumnsAsync(string connectionString, string tableName)
+    public async Task<  List<string>> GetAllColumnsAsync(string connectionString, string tableName)
     {
         var columns = new List<string>();
 
         using (var connection = new SqlConnection(connectionString))
         {
-            await connection.OpenAsync();
+           await  connection.OpenAsync();
             var command = new SqlCommand($"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @TableName", connection);
             command.Parameters.AddWithValue("@TableName", tableName);
 

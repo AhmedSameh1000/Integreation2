@@ -68,6 +68,7 @@ export class ListmodulesComponent implements OnInit {
   EditModule(Id) {
     var Dilog = this.MatDilog.open(MangeModuleComponent, {
       data: { Id: Id },
+      disableClose: true,
     });
     Dilog.afterClosed().subscribe({
       next: (res) => {

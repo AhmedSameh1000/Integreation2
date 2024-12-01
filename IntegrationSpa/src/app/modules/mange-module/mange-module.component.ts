@@ -12,6 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { DataBaseService } from 'src/app/Services/data-base.service';
 import { ModuleService } from 'src/app/Services/module.service';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-mange-module',
@@ -39,17 +40,25 @@ export class MangeModuleComponent implements OnInit {
     this.Element = document.getElementById('Sourceherer');
   }
 
-  AddReferance() {
+  AddReferance(source: string, local: string, primary: string) {
+    // Create the form group with selected values
     var Reference = new FormGroup({
-      TableFromName: new FormControl(null),
-      LocalName: new FormControl(null),
-      PrimaryName: new FormControl(null),
+      TableFromName: new FormControl(source, Validators.required),
+      LocalName: new FormControl(local, Validators.required),
+      PrimaryName: new FormControl(primary, Validators.required),
     });
 
+    if (Reference.invalid) {
+      this.toastr.error('Error Invalid data');
+      return;
+    }
+    // Push the form group to the References FormArray
     let References = this.moduleForm.get('References') as FormArray;
-
     References.push(Reference);
+    Reference.reset();
   }
+
+  isDisabled = true;
   moduleForm: FormGroup;
 
   DataBases: any[] = []; // قائمة قواعد البيانات اللي هنعرضها في الـ select

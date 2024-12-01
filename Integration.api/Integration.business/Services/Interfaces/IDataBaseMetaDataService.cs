@@ -11,7 +11,7 @@ namespace Integration.business.Services.Interfaces
     {
         Task<List<string>> GetAllTablesAsync(int databaseId);
 
-        Task<List<string>> GetAllColumnsAsync(int databaseId, string tableName);
+      Task<  List<string>> GetAllColumnsAsync(int databaseId, string tableName);
         Task<bool> CanConnectAsync(int databaseId);
     }
 }
