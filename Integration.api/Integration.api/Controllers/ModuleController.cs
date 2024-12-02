@@ -61,6 +61,22 @@ namespace Integration.api.Controllers
             {
                 return BadRequest(new { ex.Message });
             }
+        }  
+        [HttpPost("EditModule")]
+        public async Task<IActionResult> EditModule(ModuleForEditDTO moduleForEditDTO)
+        {
+            try
+            {
+                var Result = await _moduleService.EditModule(moduleForEditDTO);
+                if (!Result.Success)
+                    return BadRequest(Result);
+
+                return Ok(Result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
         }
 
         [HttpGet("Modules")]

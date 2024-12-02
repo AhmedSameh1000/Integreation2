@@ -123,50 +123,6 @@ namespace Integration.data.Migrations
                     b.ToTable("columnFroms");
                 });
 
-            modelBuilder.Entity("Integration.data.Models.ConditionFrom", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ModuleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Operation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ModuleId");
-
-                    b.ToTable("conditionFroms");
-                });
-
-            modelBuilder.Entity("Integration.data.Models.ConditionTo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ModuleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Operation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ModuleId");
-
-                    b.ToTable("ConditionTos");
-                });
-
             modelBuilder.Entity("Integration.data.Models.DataBase", b =>
                 {
                     b.Property<int>("Id")
@@ -200,18 +156,22 @@ namespace Integration.data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CloudIdName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FromDbId")
                         .HasColumnType("int");
 
                     b.Property<string>("FromInsertFlagName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FromUpdateFlagName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LocalIdName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -233,6 +193,7 @@ namespace Integration.data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ToInsertFlagName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ToPrimaryKeyName")
@@ -240,6 +201,10 @@ namespace Integration.data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ToUpdateFlagName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("condition")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fromPrimaryKeyName")
@@ -430,28 +395,6 @@ namespace Integration.data.Migrations
                     b.Navigation("Module");
                 });
 
-            modelBuilder.Entity("Integration.data.Models.ConditionFrom", b =>
-                {
-                    b.HasOne("Integration.data.Models.Module", "Module")
-                        .WithMany("conditionFroms")
-                        .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Module");
-                });
-
-            modelBuilder.Entity("Integration.data.Models.ConditionTo", b =>
-                {
-                    b.HasOne("Integration.data.Models.Module", "Module")
-                        .WithMany("ConditionTos")
-                        .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Module");
-                });
-
             modelBuilder.Entity("Integration.data.Models.Module", b =>
                 {
                     b.HasOne("Integration.data.Models.DataBase", "FromDb")
@@ -535,11 +478,7 @@ namespace Integration.data.Migrations
 
             modelBuilder.Entity("Integration.data.Models.Module", b =>
                 {
-                    b.Navigation("ConditionTos");
-
                     b.Navigation("columnFroms");
-
-                    b.Navigation("conditionFroms");
                 });
 #pragma warning restore 612, 618
         }

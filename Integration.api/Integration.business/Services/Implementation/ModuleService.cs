@@ -1,6 +1,7 @@
 ﻿using AutoRepairPro.Data.Repositories.Interfaces;
 using Integration.business.DTOs.ModuleDTOs;
 using Integration.business.Services.Interfaces;
+using Integration.data.Data;
 using Integration.data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,16 +17,19 @@ namespace Integration.business.Services.Implementation
         private readonly IGenericRepository<Module> _moduleRepository;
         private readonly ILocalService _localService;
         private readonly IGenericRepository<TableReference> _tableReference;
+        private readonly AppDbContext _appDbContext;
 
         public ModuleService(
             IGenericRepository<Module> ModuleRepository,
             ILocalService localService,
-            IGenericRepository<TableReference> TableReference
+            IGenericRepository<TableReference> TableReference,
+            AppDbContext appDbContext
         )
         {
             _moduleRepository = ModuleRepository;
             _localService = localService;
             _tableReference = TableReference;
+            _appDbContext = appDbContext;
         }
 
         public async Task<ApiResponse<bool>> CreateModule(ModuleForCreateDTO moduleForCreateDTO)
@@ -42,12 +46,13 @@ namespace Integration.business.Services.Implementation
                     fromPrimaryKeyName = moduleForCreateDTO.FromPrimaryKeyName,
                     LocalIdName = moduleForCreateDTO.LocalIdName,
                     CloudIdName = moduleForCreateDTO.CloudIdName,
-                    ToDbId = int.Parse(moduleForCreateDTO.ToDbId),
-                    FromDbId = int.Parse(moduleForCreateDTO.FromDbId),
+                    ToDbId = moduleForCreateDTO.ToDbId,
+                    FromDbId = moduleForCreateDTO.FromDbId,
                     ToInsertFlagName = moduleForCreateDTO.ToInsertFlagName,
                     ToUpdateFlagName = moduleForCreateDTO.ToUpdateFlagName,
                     FromInsertFlagName = moduleForCreateDTO.FromInsertFlagName,
                     FromUpdateFlagName = moduleForCreateDTO.FromUpdateFlagName,
+                    condition=moduleForCreateDTO.condition,
                     columnFroms = moduleForCreateDTO.Columns.Select(c => new ColumnFrom()
                     {
                         ColumnFromName = c.ColumnFrom,
@@ -168,6 +173,7 @@ namespace Integration.business.Services.Implementation
                 TableFromName = Module.TableFromName,
                 TableToName = Module.TableToName,
                 ToPrimaryKeyName = Module.ToPrimaryKeyName,
+                condition=Module.condition,
                 columnsFromDTOs = Module.columnFroms.Select(c => new ColumnFromDTO()
                 {
                     Id = c.Id,
@@ -215,5 +221,88 @@ namespace Integration.business.Services.Implementation
 
             return new ApiResponse<bool>(true, "Module deleted successfully");
         }
+
+        public async Task<ApiResponse<bool>> EditModule(ModuleForEditDTO moduleForEdit)
+        {
+            using var transaction = await _appDbContext.Database.BeginTransactionAsync(); // بدء المعاملة
+
+            try
+            {
+                // 1. جلب الـ Module الحالي من قاعدة البيانات باستخدام الـ ID
+                var module = await _moduleRepository.GetFirstOrDefault(c=>c.Id== moduleForEdit.Id);
+                if (module is null)
+                {
+                    return new ApiResponse<bool>(false, "Module not found.", false);
+                }
+
+                // 2. تحديث خصائص الـ Module بناءً على الـ DTO الجديد
+                module.Name = moduleForEdit.ModuleName;
+                module.TableFromName = moduleForEdit.TableFromName;
+                module.TableToName = moduleForEdit.TableToName;
+                module.ToPrimaryKeyName = moduleForEdit.ToPrimaryKeyName;
+                module.fromPrimaryKeyName = moduleForEdit.FromPrimaryKeyName;
+                module.LocalIdName = moduleForEdit.LocalIdName;
+                module.CloudIdName = moduleForEdit.CloudIdName;
+                module.ToDbId = moduleForEdit.ToDbId;
+                module.FromDbId = moduleForEdit.FromDbId;
+                module.ToInsertFlagName = moduleForEdit.ToInsertFlagName;
+                module.ToUpdateFlagName = moduleForEdit.ToUpdateFlagName;
+                module.FromInsertFlagName = moduleForEdit.FromInsertFlagName;
+                module.FromUpdateFlagName = moduleForEdit.FromUpdateFlagName;
+                module.condition = moduleForEdit.condition;
+                // 3. إزالة الأعمدة القديمة (إذا كانت موجودة)
+                var existingColumns = await _appDbContext.columnFroms.Where(c => c.ModuleId == moduleForEdit.Id).ToListAsync();
+                _appDbContext.columnFroms.RemoveRange(existingColumns);
+
+                // 4. إضافة الأعمدة الجديدة
+                var newColumns = moduleForEdit.Columns.Select(c => new ColumnFrom()
+                {
+                    ColumnFromName = c.ColumnFrom,
+                    ColumnToName = c.ColumnTo,
+                    isReference = c.IsChecked,
+                    TableReferenceName = c.Referance,
+                    ModuleId = moduleForEdit.Id,
+                }).ToList();
+
+                await _appDbContext.columnFroms.AddRangeAsync(newColumns);
+
+                // 5. إزالة المراجع القديمة
+                var existingReferences = await _appDbContext.References.Where(r => r.ModuleId == moduleForEdit.Id).ToListAsync();
+                _appDbContext.References.RemoveRange(existingReferences);
+
+                // 6. إضافة المراجع الجديدة
+                if (moduleForEdit.References.Any())
+                {
+                    var newReferences = moduleForEdit.References.Select(r => new TableReference()
+                    {
+                        LocalName = r.LocalName,
+                        PrimaryName = r.PrimaryName,
+                        TableFromName = r.TableFromName,
+                        ModuleId = moduleForEdit.Id,
+                    }).ToList();
+
+                    await _appDbContext.References.AddRangeAsync(newReferences);
+                }
+
+                // 7. حفظ التغييرات في قاعدة البيانات
+               var Result= await _appDbContext.SaveChangesAsync();
+
+                if(Result<=0)
+                    await transaction.RollbackAsync();
+
+
+                // 8. تأكيد المعاملة
+                await transaction.CommitAsync();
+
+                return new ApiResponse<bool>(true, "Module updated successfully.", true);
+            }
+            catch (Exception ex)
+            {
+                // في حال حدوث خطأ، نقوم بإلغاء المعاملة
+                await transaction.RollbackAsync();
+                return new ApiResponse<bool>(false, "Error: " + ex.Message, false);
+            }
+        }
+
     }
 }

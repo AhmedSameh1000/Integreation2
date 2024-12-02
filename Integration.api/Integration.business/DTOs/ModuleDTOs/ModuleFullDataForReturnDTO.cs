@@ -19,27 +19,8 @@ namespace Integration.business.DTOs.ModuleDTOs
         public string ToUpdateFlagName { get; set; }
         public string FromInsertFlagName { get; set; }
         public string FromUpdateFlagName { get; set; }
+        public string condition { get; set; }
         public List<ColumnFromDTO>  columnsFromDTOs { get; set; }
         public List<ReferancesForReturnDTO> referancesForReturnDTOs { get; set; }
-    }
-
-    public class ColumnFromDTO
-    {
-        public int Id { get; set; }
-        public string ColumnFromName { get; set; }
-        public string ColumnToName { get; set; }
-        public int ModuleId { get; set; }
-
-        public bool isReference { get; set; }
-        public string? TableReferenceName { get; set; }
-    }
-
-    public class ReferancesForReturnDTO
-    {
-        public int Id { get; set; }
-        public string TableFromName { get; set; }
-        public string LocalName { get; set; }
-        public string PrimaryName { get; set; }
-        public int? ModuleId { get; set; }
     }
 }

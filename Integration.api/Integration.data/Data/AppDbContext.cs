@@ -14,8 +14,6 @@ namespace Integration.data.Data
         public DbSet<DataBase>   dataBases { get; set; }
         public DbSet<Models.Module> modules { get; set; }
         public DbSet<ColumnFrom> columnFroms { get; set; }
-        public DbSet<ConditionFrom>  conditionFroms { get; set; }
-        public DbSet<ConditionTo>  ConditionTos{ get; set; }
         public DbSet<TableReference> References { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

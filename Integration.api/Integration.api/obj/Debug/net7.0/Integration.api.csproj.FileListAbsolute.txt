@@ -304,3 +304,4 @@ D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\refint\
 D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\Integration.api.pdb
 D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\Integration.api.genruntimeconfig.cache
 D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\ref\Integration.api.dll
+D:\TrueTech\Integration\Integration.api\Integration.api\obj\Debug\net7.0\staticwebassets.upToDateCheck.txt

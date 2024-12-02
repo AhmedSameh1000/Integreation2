@@ -25,6 +25,12 @@ export class ModuleService {
       module
     );
   }
+  EditModule(module) {
+    return this.HttpClient.post(
+      environment.BaseUrl + '/Module/EditModule',
+      module
+    );
+  }
 
   Sync(Id, SyncType) {
     return this.HttpClient.get(

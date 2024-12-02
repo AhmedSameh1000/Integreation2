@@ -1,12 +1,122 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\TrueTech\\Integration\\Integration.api\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F4853D13-6982-41D1-B52E-411CE21CF872}|Integration.data\\Integration.data.csproj|d:\\truetech\\integration\\integration.api\\integration.data\\models\\module.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4853D13-6982-41D1-B52E-411CE21CF872}|Integration.data\\Integration.data.csproj|solutionrelative:integration.data\\models\\module.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C378BB7-1F11-4AA0-BFA8-1203E6A64FE1}|Integration.business\\Integration.business.csproj|d:\\truetech\\integration\\integration.api\\integration.business\\services\\implementation\\moduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C378BB7-1F11-4AA0-BFA8-1203E6A64FE1}|Integration.business\\Integration.business.csproj|solutionrelative:integration.business\\services\\implementation\\moduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|d:\\truetech\\integration\\integration.api\\integration.api\\controllers\\modulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|solutionrelative:integration.api\\controllers\\modulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C378BB7-1F11-4AA0-BFA8-1203E6A64FE1}|Integration.business\\Integration.business.csproj|d:\\truetech\\integration\\integration.api\\integration.business\\services\\interfaces\\imoduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C378BB7-1F11-4AA0-BFA8-1203E6A64FE1}|Integration.business\\Integration.business.csproj|solutionrelative:integration.business\\services\\interfaces\\imoduleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4853D13-6982-41D1-B52E-411CE21CF872}|Integration.data\\Integration.data.csproj|d:\\truetech\\integration\\integration.api\\integration.data\\models\\columnfrom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4853D13-6982-41D1-B52E-411CE21CF872}|Integration.data\\Integration.data.csproj|solutionrelative:integration.data\\models\\columnfrom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|d:\\truetech\\integration\\integration.api\\integration.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40504B65-F8AB-4656-92A4-19DE27FD3567}|Integration.api\\Integration.api.csproj|solutionrelative:integration.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Module.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.data\\Models\\Module.cs",
+              "RelativeDocumentMoniker": "Integration.data\\Models\\Module.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.data\\Models\\Module.cs",
+              "RelativeToolTip": "Integration.data\\Models\\Module.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAowBAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T10:41:33.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Integration.api\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Integration.api\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAlwBIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T08:36:06.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ModuleController.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\ModuleController.cs",
+              "RelativeDocumentMoniker": "Integration.api\\Controllers\\ModuleController.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.api\\Controllers\\ModuleController.cs",
+              "RelativeToolTip": "Integration.api\\Controllers\\ModuleController.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwEUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T08:35:13.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ModuleService.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.business\\Services\\Implementation\\ModuleService.cs",
+              "RelativeDocumentMoniker": "Integration.business\\Services\\Implementation\\ModuleService.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.business\\Services\\Implementation\\ModuleService.cs",
+              "RelativeToolTip": "Integration.business\\Services\\Implementation\\ModuleService.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAnwIsAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T08:20:05.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ColumnFrom.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.data\\Models\\ColumnFrom.cs",
+              "RelativeDocumentMoniker": "Integration.data\\Models\\ColumnFrom.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.data\\Models\\ColumnFrom.cs",
+              "RelativeToolTip": "Integration.data\\Models\\ColumnFrom.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T10:41:46.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IModuleService.cs",
+              "DocumentMoniker": "D:\\TrueTech\\Integration\\Integration.api\\Integration.business\\Services\\Interfaces\\IModuleService.cs",
+              "RelativeDocumentMoniker": "Integration.business\\Services\\Interfaces\\IModuleService.cs",
+              "ToolTip": "D:\\TrueTech\\Integration\\Integration.api\\Integration.business\\Services\\Interfaces\\IModuleService.cs",
+              "RelativeToolTip": "Integration.business\\Services\\Interfaces\\IModuleService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T08:20:14.994Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -15,15 +15,13 @@
         public int FromDbId { get; set; }
         public DataBase FromDb { get; set; }
         public SyncType SyncType { get; set; }
-        public List<ConditionFrom>  conditionFroms { get; set; }
-        public List<ConditionTo>   ConditionTos{ get; set; }
         public List<ColumnFrom> columnFroms { get; set; }
 
         public string ToInsertFlagName { get; set; }
         public string ToUpdateFlagName { get; set; } 
         public string FromInsertFlagName { get; set; }
         public string FromUpdateFlagName { get; set; }
-
+        public string? condition { get; set; }
     }
 
 

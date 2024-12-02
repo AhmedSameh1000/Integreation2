@@ -39,7 +39,7 @@ namespace Integration.business.Services.Implementation
             var columnFrom = module.columnFroms;
             //var queryFrom = $"SELECT {string.Join(',', columnFrom.Select(c => c.Name))} FROM {module.TableFrom?.Name} WHERE {string.Join(" OR ", module.conditionFroms?.Select(c => c.Operation) ?? new List<string>())}";
             //var queryFrom = $"SELECT {string.Join(',', columnFrom.Select(c => c.ColumnFromName))} FROM {module.TableFromName} where {module.FromInsertFlagName}=1 or {module.FromUpdateFlagName}=1";
-            var queryFrom = $"SELECT {string.Join(',', columnFrom.Select(c => c.ColumnFromName))} FROM {module.TableFromName}";
+            var queryFrom = $"SELECT {string.Join(',', columnFrom.Select(c => c.ColumnFromName))} FROM {module.TableFromName} {module.condition}";
             var updateQueries = new StringBuilder();
             var allValues = new List<Dictionary<string, string>>();
             var AllIdsAndLocalIdsOnCloud = await FetchIdsAsync(module.ToPrimaryKeyName, module.LocalIdName, module.TableToName, module);

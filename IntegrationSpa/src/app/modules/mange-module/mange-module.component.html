@@ -9,7 +9,7 @@
     <i class="fa-solid fa-x" style="cursor: pointer" matDialogClose=""></i>
   </div>
   <mat-tab-group class="p-3" [(selectedIndex)]="selectedTabIndex">
-    <mat-tab label="Basic Data">
+    <mat-tab label="Basic">
       <div class="d-flex justify-content-between">
         <div class="mb-3">
           <label for="moduleName" class="form-label">Module Name</label>
@@ -64,7 +64,7 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Dbs Information">
+    <mat-tab label="Information">
       <div class="d-flex myCon">
         <div style="width: 45%" class="from">
           <div class="mb-3">
@@ -248,8 +248,8 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Column Mapping">
-      <div class="container20">
+    <mat-tab label="Mapping">
+      <div class="container20 Scrool">
         <h2>Column Mapping Configuration</h2>
 
         <div class="mapping-rows" formArrayName="Columns">
@@ -308,7 +308,7 @@
       </div>
     </mat-tab>
     <mat-tab label="References">
-      <div class="container">
+      <div class="container Scrool">
         <h2>Column Referance Configuration</h2>
 
         <div class="mapping-rows" formArrayName="References">
@@ -367,17 +367,22 @@
 
             <!-- Remove Button -->
             <div class="button-container">
-              <button type="button" class="remove-btn">
+              <button
+                type="button"
+                class="remove-btn"
+                (click)="removeReferance(i)"
+              >
                 <i class="fas fa-trash"></i> Remove
               </button>
             </div>
           </div>
         </div>
 
-        <div
-          class="actions d-flex justify-content-between d-flex justify-content-around"
-        >
-          <div class="mapping-row d-flex justify-content-between w-75">
+        <div class="actions d-flex d-flex justify-content-between">
+          <div
+            class="mapping-row d-flex justify-content-between"
+            style="width: 100% !important"
+          >
             <select
               id="Sourceherer"
               required
@@ -407,6 +412,74 @@
         </div>
       </div>
     </mat-tab>
+    <mat-tab label="Conditions Builder">
+      <div class="query-builder">
+        <div class="controls">
+          <div class="input-group">
+            <select #fieldInput class="form-control" placeholder="Field name">
+              <option *ngFor="let column of ColumnsFrom" [value]="column">
+                {{ column }}
+              </option>
+            </select>
+            <select
+              #operatorSelect
+              class="form-control"
+              (change)="ShowBetweenValue(operatorSelect.value)"
+            >
+              <option [value]="Operator" *ngFor="let Operator of Operators">
+                {{ Operator }}
+              </option>
+            </select>
+            <input #valueInput placeholder="Value" class="form-control" />
+            <input
+              placeholder="Value"
+              #btw2
+              name="btn2"
+              class="form-control"
+              [hidden]="!BetweenDisplay"
+            />
+
+            <button
+              (click)="
+                addCondition(
+                  fieldInput.value,
+                  operatorSelect.value,
+                  valueInput.value,
+                  btw2.value
+                )
+              "
+              class="btn-add"
+            >
+              Add Condition
+            </button>
+          </div>
+
+          <div class="operator-buttons">
+            <button (click)="addOperator('AND')" class="btn-operator">
+              AND
+            </button>
+            <button (click)="addOperator('OR')" class="btn-operator">OR</button>
+          </div>
+        </div>
+
+        <div class="query-preview">
+          <textarea
+            [value]="queryPreview"
+            name="condition"
+            readonly
+            class="form-control"
+            formControlName="condition"
+            rows="5"
+          ></textarea>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button (click)="clearQuery()" class="btn-clear mt-2">
+            Clear Query
+          </button>
+        </div>
+      </div>
+    </mat-tab>
   </mat-tab-group>
   <div class="d-flex justify-content-between">
     <button
@@ -421,7 +494,7 @@
       mat-raised-button
       color="primary"
       (click)="nextTab()"
-      *ngIf="selectedTabIndex != 3"
+      *ngIf="selectedTabIndex != 4"
     >
       Next
     </button>
@@ -429,7 +502,8 @@
       (click)="AddModule()"
       mat-raised-button
       color="primary"
-      *ngIf="selectedTabIndex == 3 && !data"
+      *ngIf="selectedTabIndex == 4 && !data"
+      [disabled]="moduleForm.invalid"
     >
       Add Module
     </button>
@@ -437,7 +511,8 @@
       (click)="SaveModule()"
       mat-raised-button
       color="primary"
-      *ngIf="selectedTabIndex == 3 && data"
+      [disabled]="moduleForm.invalid"
+      *ngIf="selectedTabIndex == 4 && data"
     >
       Save Module
     </button>

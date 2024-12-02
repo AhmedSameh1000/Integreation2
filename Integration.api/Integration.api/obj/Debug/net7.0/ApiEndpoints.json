@@ -202,6 +202,22 @@
   },
   {
     "ContainingType": "Integration.api.Controllers.ModuleController",
+    "Method": "EditModule",
+    "RelativePath": "api/Module/EditModule",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "moduleForEditDTO",
+        "Type": "Integration.business.DTOs.ModuleDTOs.ModuleForEditDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Integration.api.Controllers.ModuleController",
     "Method": "GetModule",
     "RelativePath": "api/Module/GetModule/{id}",
     "HttpMethod": "GET",

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\TrueTech\Integration\Integration.api\Integration.api\obj\Release\net7.0\win-x86\PubTmp\Out\" />
+  <dbfullsql path="D:\TrueTech\Integration\Integration.api\Integration.api\obj\Release\net7.0\win-x86\PubTmp\EFSQLScripts\Integration.data.Data.AppDbContext.sql" />
+</sitemanifest>

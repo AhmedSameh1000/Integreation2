@@ -5,6 +5,7 @@ import {
   ElementRef,
   Inject,
   OnInit,
+  QueryList,
   ViewChild,
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -55,7 +56,6 @@ export class MangeModuleComponent implements OnInit {
     // Push the form group to the References FormArray
     let References = this.moduleForm.get('References') as FormArray;
     References.push(Reference);
-    Reference.reset();
   }
 
   isDisabled = true;
@@ -155,7 +155,7 @@ export class MangeModuleComponent implements OnInit {
   selectedTabIndex = 0;
 
   nextTab() {
-    if (this.selectedTabIndex >= 3) return;
+    if (this.selectedTabIndex >= 4) return;
     this.selectedTabIndex++;
   }
   Prevtab() {
@@ -165,7 +165,10 @@ export class MangeModuleComponent implements OnInit {
   }
 
   AddModule() {
-    console.log(this.moduleForm.value);
+    if (this.moduleForm.invalid) return;
+    this.moduleForm.patchValue({
+      condition: this.queryPreview,
+    });
     this.manageModuleService.CreateModule(this.moduleForm.value).subscribe({
       next: (res) => {
         console.log(res);
@@ -179,13 +182,37 @@ export class MangeModuleComponent implements OnInit {
     });
   }
   SaveModule() {
+    this.moduleForm.patchValue({
+      condition: this.queryPreview,
+    });
+    if (this.moduleForm.invalid) return;
+    var id = new FormControl(this.data.Id);
+    this.moduleForm.addControl('id', id);
     console.log(this.moduleForm.value);
+    this.manageModuleService.EditModule(this.moduleForm.value).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.toastr.success(res.message);
+        this.MatdiloRef.close(true);
+      },
+      error: (err) => {
+        console.log(err);
+        this.toastr.success(err.error.message);
+      },
+    });
   }
   get Columns() {
     return this.moduleForm.get('Columns') as FormArray;
   }
+  get Referance() {
+    return this.moduleForm.get('References') as FormArray;
+  }
   removeColumn(index: number) {
     this.Columns.removeAt(index);
+  }
+
+  removeReferance(index: number) {
+    this.Referance.removeAt(index);
   }
   OnRefranceTableChange(
     event: Event,
@@ -297,6 +324,7 @@ export class MangeModuleComponent implements OnInit {
       toUpdateFlagName: new FormControl('', Validators.required),
       fromInsertFlagName: new FormControl('', Validators.required),
       fromUpdateFlagName: new FormControl('', Validators.required),
+      condition: new FormControl(null),
       Columns: new FormArray([]),
       References: new FormArray([]),
     });
@@ -310,6 +338,7 @@ export class MangeModuleComponent implements OnInit {
         Validators.required
       ),
       tableToName: new FormControl(moduleData.tableToName, Validators.required),
+      condition: new FormControl(moduleData.condition),
       toPrimaryKeyName: new FormControl(
         moduleData.toPrimaryKeyName,
         Validators.required
@@ -386,4 +415,52 @@ export class MangeModuleComponent implements OnInit {
 
     Columns.push(Column);
   }
+
+  queryPreview: string = '';
+  addCondition(
+    field: string,
+    operator: string,
+    value: string,
+    btwval2: string
+  ) {
+    if (!field || !operator || !value) return;
+
+    if (this.queryPreview === '') this.queryPreview += 'Where ';
+
+    let subquery =
+      operator === 'BETWEEN'
+        ? `${field} ${operator} ${value} AND ${btwval2}`
+        : `${field} ${operator} ${value}`;
+    this.queryPreview += subquery;
+  }
+
+  addOperator(operator: string) {
+    if (this.queryPreview) {
+      this.queryPreview += ` ${operator} `;
+    }
+  }
+
+  clearQuery() {
+    this.queryPreview = '';
+    this.moduleForm.get('condition').reset();
+  }
+
+  BetweenDisplay = false;
+  ShowBetweenValue(operator: string) {
+    this.BetweenDisplay = operator === 'BETWEEN';
+  }
+  Operators = [
+    '=',
+    '!=',
+    '>',
+    '<',
+    '>=',
+    '<=',
+    'BETWEEN',
+    'In',
+    'NOT IN',
+    'IS NULL',
+    'IS NOT NULL',
+    'NOT',
+  ];
 }
